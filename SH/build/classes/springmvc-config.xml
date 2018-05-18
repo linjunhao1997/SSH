@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<mvc:annotation-driven>
+	
+		<mvc:message-converters>
+	 
+			
+		 	
+			 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			 	 <property name="supportedMediaTypes">
+   					<list>
+   						<value>text/html;charset=UTF-8</value>
+   						<value>application/json;charset=UTF-8</value>
+   					</list>
+ 				 </property>
+			 </bean>
+			 
+	    </mvc:message-converters>
+	     
+	</mvc:annotation-driven>
+	<!--
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"
+		p:messageConverters-ref="messageConverters"/>
+		<util:list id="messageConverters">
+			<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"></bean>
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
+			<bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"></bean>
+			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"
+				p:marshaller-ref="xmlMarshaller"
+				p:unmarshaller-ref="xmlMarshaller">
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				 <property name="supportedMediaTypes">
+   					<list>
+   						<value>text/html;charset=UTF-8</value>
+   						<value>application/json;charset=UTF-8</value>
+   					</list>
+ 				 </property>
+			</bean>
+		</util:list>
+		
+		<bean id="xmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+			<property name="streamDriver">
+				<bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>
+			</property>
+			<property name="annotatedClasses">
+				<list>
+					<value>com.junhao.domain.User</value>
+				</list>
+			</property>
+		</bean>
+	   -->
+	<context:component-scan base-package="com.junhao.controller" />
+	
+	<mvc:resources location="/WEB-INF/resource/js/" mapping="/resource/js/**"/>
+    <mvc:resources location="/WEB-INF/resource/fonts/" mapping="/resource/fonts/**"/>
+    <mvc:resources location="/WEB-INF/resource/css/" mapping="/resource/css/**"/>
+    <mvc:resources location="/WEB-INF/resource/images/" mapping="/resource/images/**"/>
+
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>

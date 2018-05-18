@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE hibernate-mapping PUBLIC     
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">   
+  
+<hibernate-mapping package="com.junhao.domain">  
+    <class name="com.junhao.domain.GoodsImage" table="t_goodsimage">  
+        <id name="imgid" column="imgid">  
+            <generator class="native"></generator>  
+        </id>  
+        <property name="imgpath" length="50"></property>
+        <many-to-one name="goods" class="com.junhao.domain.Goods" column="gid"/>
+    
+    </class>  
+</hibernate-mapping> 

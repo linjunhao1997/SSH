@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE hibernate-mapping PUBLIC     
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">   
+  
+<hibernate-mapping package="com.junhao.domain">  
+    <class name="com.junhao.domain.Admin" table="t_admin">  
+        <id name="id">  
+            <generator class="native"></generator>  
+        </id>  
+        <property name="adminname"></property>  
+        <property name="adminpassword"></property>  
+        
+    </class>  
+</hibernate-mapping> 
