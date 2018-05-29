@@ -9,14 +9,13 @@
 <link href="<c:url value="/resource/css/main.css" />" type="text/css"
 	rel="stylesheet" />
 <title>编辑商品</title>
-<base href="<c:url value="/" />" />
 </head>
 <body>
 	<div class="main">
 		<h2 class="title">
 			<span>编辑商品</span>
 		</h2>
-		<form:form action="goods/editSave" modelAttribute="entity">
+		<form:form action="../editSave" modelAttribute="entity">
 			<fieldset>
 				<legend>商品</legend>
 				<p>
@@ -39,7 +38,7 @@
 		<p style="color: red">${message}</p>
 		<form:errors path="*"></form:errors>
 		<p>
-			<a href="goods/list" class="abtn out">返回列表</a>
+			<a href="<c:url value='../list'/>" class="abtn out">返回列表</a>
 		</p>
 	</div>
 </body>

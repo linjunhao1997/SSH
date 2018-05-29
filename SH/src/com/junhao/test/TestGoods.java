@@ -1,23 +1,15 @@
 package com.junhao.test;
 
 
-import java.util.Iterator;
-import java.util.Set;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.junhao.domain.Goods;
-import com.junhao.domain.GoodsImage;
-import com.junhao.domain.User;
 import com.junhao.service.GoodsService;
-import com.junhao.service.UserService;
 
 
 

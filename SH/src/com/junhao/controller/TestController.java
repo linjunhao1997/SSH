@@ -1,26 +1,18 @@
 package com.junhao.controller;
 
-import java.io.IOException;
+import java.io.File;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.util.WebUtils;
 
 import com.junhao.domain.User;
-import com.junhao.domain.XmlTest;
 
 @Controller
 public class TestController {
@@ -50,8 +42,12 @@ public class TestController {
 	//接受json字符串并返回数据
 	@RequestMapping(value="sendJson")
 	@ResponseBody
-	public String sendJson(@RequestBody User user) {
+	public String sendJson(@RequestBody User user,HttpServletRequest request) {
 		System.out.println(user.getUsername()+user.getPassword());
+		//File file = new File("E:\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\SH\\WEB-INF\\resource\\images\\新建文本文档.txt");
+		//String path=request.getServletContext().getRealPath("/WEB-INF/resource/images");
+		//File file = new File(path,"新建文本文档.txt");
+		//file.delete();
 		return "接收成功";
 	}
 	

@@ -1,22 +1,48 @@
 package com.junhao.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
+@Entity
+@Table(name="t_order")
 public class Order {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column
 	private Integer userid;
-	private String goodsname;
+	
+	@Column()
 	private String address;
 	
+	@Column
 	private Integer quantity;
+	
+	@Column
 	private Double price;
-	private User user;
-	//@OneToOne(fetch = FetchType.EAGER,targetEntity = Goods.class)
-	//@JoinColumn(name="goodsid")
-	private Goods goods;
+	
+	@Column
 	private Integer state;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="uid")
+	private User user;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="goodsid")
+	private Goods goods;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -60,12 +86,7 @@ public class Order {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public String getGoodsname() {
-		return goodsname;
-	}
-	public void setGoodsname(String goodsname) {
-		this.goodsname = goodsname;
-	}
+	
 	public Goods getGoods() {
 		return goods;
 	}

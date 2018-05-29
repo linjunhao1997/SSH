@@ -1,26 +1,24 @@
 package com.junhao.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Iterator;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,7 +27,7 @@ import com.junhao.domain.GoodsImage;
 import com.junhao.service.GoodsService;
 
 @Controller
-@RequestMapping("/goods")
+@RequestMapping("admin/goods")
 public class GoodsController {
 	
 	@Resource
@@ -53,32 +51,39 @@ public class GoodsController {
 	 * 删除单个产品对象Action
 	 */
 	@RequestMapping("/delete/{goodsid}")
-	public String delete(Model model,@PathVariable int goodsid,@RequestParam(required=false,defaultValue="1") int pageNO,RedirectAttributes redirectAttributes){
+	public String delete(Model model,
+			@PathVariable int goodsid,
+			@RequestParam(required=false,defaultValue="1") int pageNO,
+			RedirectAttributes redirectAttributes,
+			HttpServletRequest request){
+		
+		//目前只有一张图片，取第一个即可
+		Iterator<GoodsImage> gImgSet = goodsService.getGoodsById(goodsid).getGoodsimages().iterator();
+		
+		try {
+		if(gImgSet.hasNext()) {
+			GoodsImage gImgPath = gImgSet.next();
+			String imgPath = gImgPath.getImgpath();
+			File localFile=new File("E:\\eclipse-workspace\\SH\\WebContent\\WEB-INF\\resource\\images",imgPath);
+			File file = new File(request.getServletContext().getRealPath("/WEB-INF/resource/images"),imgPath);
+			
+			file.delete();
+			localFile.delete();
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		if(goodsService.deleteGoods(goodsid))
 		{
 			redirectAttributes.addFlashAttribute("successmessage", "删除成功！");
+			
 		}else{
 			redirectAttributes.addFlashAttribute("faildmessage", "删除失败！");
 		}
-		return "redirect:/goods/list?pageNO="+pageNO;
+		return "redirect:/admin/goods/list?pageNO="+pageNO;
 	}
 	
-	/*
-	 * 删除多个产品对象Action
-	 
-	@RequestMapping("/deletes")
-	public String deletes(Model model,@RequestParam int[] goodsid,@RequestParam(required=false,defaultValue="1") int pageNO,RedirectAttributes redirectAttributes){
-		//执行删除
-		int rows=goodsService.deleteSomeGoods(goodsid);
-		if(rows>0)
-		{
-			redirectAttributes.addFlashAttribute("message", "删除"+rows+"行记录成功！");
-		}else{
-			redirectAttributes.addFlashAttribute("message", "删除失败！");
-		}
-		return "redirect:/goods/list?pageNO="+pageNO;
-	}
-	*/
 	
 	/*
 	 * 添加商品
@@ -148,28 +153,41 @@ public class GoodsController {
 	 * 上传图片保存
 	 */
 	@RequestMapping("/upPictureSave/{imgid}")
-	public String upPictureSave(Model model,@PathVariable("imgid") Integer imgid,MultipartFile picFile,HttpServletRequest request){
+	public String upPictureSave(Model model,@PathVariable Integer imgid,MultipartFile picFile,HttpServletRequest request){
 		//如果选择了文件
 		if(picFile!=null){ 
 			//如果文件大小不为0
 			if(picFile.getSize()>0){
 				//获得上传位置
 				String path=request.getServletContext().getRealPath("/WEB-INF/resource/images");
-				//String path="E:\\eclipse-workspace\\SH\\WebContent\\WEB-INF\\resource\\images";
+				String localPath="E:\\eclipse-workspace\\SH\\WebContent\\WEB-INF\\resource\\images";
 				//生成文件名
-				String imgpath=UUID.randomUUID().toString()+picFile.getOriginalFilename().substring(picFile.getOriginalFilename().lastIndexOf("."));
-				File tempFile=new File(path, imgpath);
+				String imgPath=UUID.randomUUID().toString()+picFile.getOriginalFilename().substring(picFile.getOriginalFilename().lastIndexOf("."));
+				
+				File localFile = new File(localPath,imgPath);
+				File tempFile=new File(path, imgPath);
 				try {
 					//保存文件
 					picFile.transferTo(tempFile);
+					//保存到本地
+					InputStream in = new FileInputStream(tempFile);
+					OutputStream out = new FileOutputStream(localFile);
+					byte[] buff = new byte[2048];
+					int len =0;
+					while((len=in.read(buff))!=-1) {
+						out.write(buff,0,len);
+					}
+					
+					in.close();
+					out.close();
 					//更新数据
 					//Set<GoodsImage> goodsImages = new HashSet<GoodsImage>();
 					
 					
 					//entity.setGoodsimages(goodsImages);
-					goodsService.uploadGoodsImage(imgid,imgpath);
+					goodsService.uploadGoodsImage(imgid,imgPath);
 					//转向列表页
-					return "redirect:/goods/list";	
+					return "redirect:/admin/goods/list";	
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

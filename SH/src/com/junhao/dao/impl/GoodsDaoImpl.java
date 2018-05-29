@@ -2,30 +2,19 @@ package com.junhao.dao.impl;
 
 
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.junhao.dao.GoodsDao;
-import com.junhao.dao.UserDao;
 import com.junhao.domain.Goods;
 import com.junhao.domain.GoodsImage;
-import com.junhao.domain.Order;
-import com.junhao.domain.User;
-import com.junhao.service.GoodsService;
 
 
 @Repository

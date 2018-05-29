@@ -32,7 +32,7 @@
 		<p style="color: red">${message}</p>
 		<form:errors path="*"></form:errors>
 		<p>
-		    <a href="<c:url value="/goods/list" />"  class="abtn out">返回列表</a>
+		    <a href="list"  class="abtn out">返回列表</a>
 		</p>
 	</div>
 </body>

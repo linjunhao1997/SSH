@@ -4,13 +4,11 @@ package com.junhao.controller;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -189,23 +186,7 @@ public class UserController {    //用户控制器
     }
     
     //搜索
-   /* @RequestMapping(value="search")
-    @ResponseBody
-    public String search(Model model,@RequestBody Map<String,String> map) {
-    	String searchkey = map.get("searchkey");
-    	System.out.println(searchkey);
-    	//model.addAttribute("goodsList", goodsService.searchGoods(searchkey));
-    	return "/SH/resource/views/main.jsp";
-    	
-    }*/
     @RequestMapping(value="search")
-    
-   /* public String search(Model model,@RequestBody Map<String,String> map) {
-    	String searchkey = map.get("searchkey");
-    	System.out.println(searchkey);
-    	model.addAttribute("goodsList", goodsService.searchGoods(searchkey));
-    	return "redirect:mainPage";
-    }*/
     public String search(Model model,@RequestParam String searchkey) {
     	System.out.println(searchkey);
     	model.addAttribute("searchkey", searchkey);

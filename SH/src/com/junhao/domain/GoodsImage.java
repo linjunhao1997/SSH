@@ -1,9 +1,26 @@
 package com.junhao.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="t_goodsimage")
 public class GoodsImage {
+	
+	@Id
 	private Integer imgid;
+	
+	@Column(length=50)
 	private String imgpath;
+	
+	@ManyToOne
+	@JoinColumn(name="gid")
 	private Goods goods;
+	
 	public Integer getImgid() {
 		return imgid;
 	}

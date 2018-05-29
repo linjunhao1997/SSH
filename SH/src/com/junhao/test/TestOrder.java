@@ -38,7 +38,7 @@ public class TestOrder {
 	@Test
 	public void demoTest2() {
 	
-		Set<Order> orders=orderService.showOrder(8);
+		List<Order> orders=orderService.showOrder(8);
 		Iterator<Order> iterator = orders.iterator();
 		while(iterator.hasNext()) {
 			System.out.println(iterator.next().getGoods().getIntroduce());

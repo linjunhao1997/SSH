@@ -6,15 +6,21 @@
   <welcome-file-list>
 	<welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 指定Spring Ioc容器读取Bean定义的XML文件路径-->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
+  	<!-- 这个文件定义了根上下文 -->
   	<param-value>classpath:applicationContext.xml</param-value>
   </context-param>
-  
+  <!-- 此监听器实现了ServletContextListener接口，负责IOC容器在Web环境的启动
+  	交由ContextLoader创建根应用上下文WebApplicationContext-->
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
+  
+  <!-- 配置前端控制器 -->
   <servlet>
   	<servlet-name>springmvc</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -34,6 +40,7 @@
 		</multipart-config>
   </servlet>
   
+  <!-- 将DispatcherServlet映射到/ -->
   <servlet-mapping>
   	<servlet-name>springmvc</servlet-name>
   	<url-pattern>/</url-pattern>

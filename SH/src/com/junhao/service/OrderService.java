@@ -15,5 +15,5 @@ public interface OrderService {
 	public boolean deleteOrder(Order order);
 	
 	//展示订单，也是购物车中的订单
-	public Set<Order> showOrder(Integer id);
+	public List<Order> showOrder(Integer id);
 }

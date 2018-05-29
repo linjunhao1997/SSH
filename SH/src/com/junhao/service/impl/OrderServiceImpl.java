@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
 		this.orderDao.saveOrderByUseridAndGoodsid(user, goodsid);
 	}
 	@Override
-	public Set<Order> showOrder(Integer id) {
+	public List<Order> showOrder(Integer id) {
 		return this.orderDao.findOrder(id);
 	}
 	@Override

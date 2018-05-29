@@ -1,43 +1,31 @@
 package com.junhao.controller;
 
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.junhao.domain.Admin;
-import com.junhao.domain.User;
-import com.junhao.domain.Validate;
-import com.junhao.service.OrderService;
 import com.junhao.service.UserService;
 
+/**
+ * @author junhao
+ * 该控制器类主要处理管理员登录的操作
+ *
+ */
 @Controller
+@RequestMapping("admin")
 public class AdminController {    //用户控制器
 
 	@Autowired
 	private UserService userService; 
 	
-	@RequestMapping(value="adminlogin")  //处理login请求
+	@RequestMapping(value="/login")  //处理login请求
     public  ModelAndView login(HttpSession session,HttpServletRequest request){
     	
 		ModelAndView mv = new ModelAndView();

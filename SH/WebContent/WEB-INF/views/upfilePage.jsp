@@ -14,7 +14,7 @@
 		<h2 class="title">
 			<span>上传图片</span>
 		</h2>
-		<form action="<c:url value='/goods/upPictureSave/'/><c:forEach items="${entity.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgid}</c:forEach>" method="post"
+		<form action="../upPictureSave/<c:forEach items="${entity.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgid}</c:forEach>" method="post"
 			enctype="multipart/form-data">
 			
 			<fieldset>
@@ -36,7 +36,7 @@
 			</form>
 			<p style="color: red">${message}</p>
 			<p>
-				<a href="<c:url value="/goods/list" />" class="abtn out">返回列表</a>
+				<a href="../../list" class="abtn out">返回列表</a>
 			</p>
 	</div>
 </body>
