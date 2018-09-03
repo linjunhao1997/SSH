@@ -9,11 +9,11 @@ import com.junhao.domain.User;
 public interface OrderService {
 	
 	//通过物品id为用户添加新的订单
-	public void addOrder(User user,Integer goodsid);
+	void insertOrder(User user, Integer goodsid);
 	
 	//删除订单
-	public boolean deleteOrder(Order order);
+	boolean deleteOrder(Order order);
 	
 	//展示订单，也是购物车中的订单
-	public List<Order> showOrder(Integer id);
+	List<Order> listOrders(Integer id);
 }

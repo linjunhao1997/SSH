@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void saveUser(User user) {
-		this.userDao.save(user);
+		this.userDao.saveUser(user);
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String findUserById(Integer id) {
-		return this.userDao.findById(id);
+	public String getUsername(Integer id) {
+		return this.userDao.getUsername(id);
 	}
 
 	@Override
-	public List<User> findAllUser() {
-		return this.userDao.findAll();
+	public List<User> listUsers() {
+		return this.userDao.listUsers();
 	}
 
 	
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User findUserByName(String username) {
-		return this.userDao.findByName(username);
+		return this.userDao.getUser(username);
 	}
 
 	@Override
@@ -66,30 +66,36 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User login(String username, String password) {
+	public User getUser(String username, String password) {
 		
-		return this.userDao.findUsernameAndPassword(username, password);
+		return this.userDao.getUser(username, password);
 	}
 	
 	@Override
-	public Admin adminlogin(String adminname, String adminpassword) {
-		return this.userDao.findAdminnameAndAdminpassword(adminname, adminpassword);
+	public Admin getAdmin(String adminname, String adminpassword) {
+		return this.userDao.getAdmin(adminname, adminpassword);
 	}
 
 	@Override
-	public void register(String username, String password, String phone, String email) {
+	public void insertUser(String username, String password, String phone, String email) {
 		this.userDao.saveUser(username, password, phone, email);
 		
 	}
 
 	@Override
-	public boolean checkUserName(String username) {
-		return this.userDao.findUserName(username);
+	public boolean existUsername(String username) {
+		return this.userDao.existUsername(username);
 	}
 
 	@Override
-	public boolean modifyUserPassword(User user, String password) {
+	public boolean updateUserPassword(User user, String password) {
 		return this.userDao.updateUserPassword(user,password);
+	}
+
+	@Override
+	public User getUser(String username) {
+		
+		return this.userDao.getUser(username);
 	}
 
 	

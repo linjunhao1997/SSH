@@ -32,74 +32,59 @@ public class UserDaoImpl implements UserDao {
 	
 	private Session getSession() {
 		return sessionFactory.openSession();
-		
 	}
+	
 	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-		
+		return sessionFactory.getCurrentSession();	
 	}
 	
 	@Override
-	public void save(User user) {
-		
-		
-	}
+	public void saveUser(User user) {}
 
 	@Override
-	public void update(User user) {
-		
-		
-	}
+	public void update(User user) {}
 
 	@Override
-	public void delete(User user) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void delete(User user) {}
 
 	@Override
-	public String findById(Integer id) {
+	public String getUsername(Integer id) {
 		String hql = "select username from User u where u.id=:id";
-		String s=(String) getCurrentSession().createQuery(hql).setParameter("id",id).uniqueResult(); 
+		String s = (String)getCurrentSession().createQuery(hql).setParameter("id", id).uniqueResult();
 		return s;
 	}
 
 	@Override
-	public List<User> findAll() {
-		
-		
+	public List<User> listUsers(){	
 		return null;
 	}
 	
-	
-	
-	
-	
 	@Override
-	public User findByName(String username) {
+	public User getUser(String username) {
 		Criteria criteria  = getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username",username ));
+		criteria.add(Restrictions.eq("username", username));
 		User user = (User)criteria.uniqueResult();
 		return user;	
 	}
+	
 	@Override
 	public void saveOrder(Integer id) {
-		Session session=getCurrentSession();
-		User user =(User)session.get(User.class, id);
+		Session session = getCurrentSession();
+		User user = (User)session.get(User.class, id);
 		Order order = new Order();
 		order.setAddress("广东省广州市");
 		order.setPrice(50.00);
 		order.setUser(user);
 		user.getOrders().add(order);
 		session.save(user);
-		session.save(order);
-		
+		session.save(order);	
 	}
+	
 	@Override
-	public User findUsernameAndPassword(String username, String password) {
+	public User getUser(String username, String password) {
 		Criteria criteria  = getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username",username ));
-		criteria.add(Restrictions.eq("password",password ));
+		criteria.add(Restrictions.eq("username", username));
+		criteria.add(Restrictions.eq("password", password));
 		User user = (User)criteria.uniqueResult();
 		return user;
 	}
@@ -119,36 +104,34 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	//检查用户名
-	public boolean findUserName(String username) {
-		Criteria criteria  = getCurrentSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("username",username ));
+	public boolean existUsername(String username) {
+		Criteria criteria = getCurrentSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("username", username));
 		User user = (User)criteria.uniqueResult();
-		if(user!=null) {
+		if (user != null) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
+	
 	@Override
 	public boolean updateUserPassword(User user, String password) {
 		user.setPassword(password);
 		try {
 			getCurrentSession().update(user);
 			return true;
-		}catch(HibernateException e) {
+		} catch (HibernateException e) {
 			return false;
 		}
 	}
+	
 	@Override
-	public Admin findAdminnameAndAdminpassword(String adminname, String adminpassword) {
+	public Admin getAdmin(String adminname, String adminpassword) {
 		Criteria criteria  = getCurrentSession().createCriteria(Admin.class);
-		criteria.add(Restrictions.eq("adminname",adminname ));
-		criteria.add(Restrictions.eq("adminpassword",adminpassword ));
+		criteria.add(Restrictions.eq("adminname", adminname));
+		criteria.add(Restrictions.eq("adminpassword", adminpassword));
 		Admin admin = (Admin)criteria.uniqueResult();
 		return admin;
 	}
-
-
-	
 }

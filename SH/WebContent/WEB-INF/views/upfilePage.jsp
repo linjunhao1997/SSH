@@ -14,7 +14,7 @@
 		<h2 class="title">
 			<span>上传图片</span>
 		</h2>
-		<form action="../upPictureSave/<c:forEach items="${entity.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgid}</c:forEach>" method="post"
+		<form action="../upPictureSave/${entity.goodsid}" method="post"
 			enctype="multipart/form-data">
 			
 			<fieldset>
@@ -26,7 +26,7 @@
 					<label for="price">商品价格：</label>${entity.price}
 				</p>
 				<p>
-					<label for="title">商品图片：</label> <input type="file" name="picFile" />
+					<label for="title">商品图片：</label> <input type="file" name="file" />
 				</p>
 
 				<p>
@@ -36,7 +36,7 @@
 			</form>
 			<p style="color: red">${message}</p>
 			<p>
-				<a href="../../list" class="abtn out">返回列表</a>
+				<a href="/SH/admin/goods/list" class="abtn out">返回列表</a>
 			</p>
 	</div>
 </body>

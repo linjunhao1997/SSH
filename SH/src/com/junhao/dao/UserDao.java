@@ -6,27 +6,29 @@ import com.junhao.domain.Admin;
 import com.junhao.domain.User;
 
 public interface UserDao {
-	User findUsernameAndPassword(String username,String password);
 	
-	Admin  findAdminnameAndAdminpassword(String adminname,String adminpassword);
-	public void saveUser(String username,String password,String phone,String email);
+	User getUser(String username, String password);
 	
+	Admin getAdmin(String adminname, String adminpassword);
 	
-	public void save(User user); 
-	public void update(User user);
-	public void delete(User user);
-	public String findById(Integer id);
-	public List<User> findAll();
+	void saveUser(String username, String password, String phone, String email);
 	
+	void saveUser(User user); 
 	
+	void update(User user);
 	
+	void delete(User user);
 	
-	public User findByName(String username);
+	String getUsername(Integer id);
 	
+	List<User> listUsers();
 	
-	public void saveOrder(Integer id);
+	User getUser(String username);
 	
-	public boolean findUserName(String username);
+	void saveOrder(Integer id);
 	
-	public boolean updateUserPassword(User user,String password);
+	boolean existUsername(String username);
+	
+	boolean updateUserPassword(User user, String password);
+
 }

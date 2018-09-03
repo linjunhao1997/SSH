@@ -1,15 +1,15 @@
 package com.junhao.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -17,13 +17,17 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="t_goods")
 public class Goods {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer goodsid;
+	@GeneratedValue(generator ="paymentableGenerator")       
+	@GenericGenerator(name ="paymentableGenerator", strategy ="identity")
+	private int goodsid;
 	
 	@Pattern(regexp="^[^><&#]{1,50}$",message="{pattern}")
 	@NotNull(message="{notNull}")
@@ -31,11 +35,11 @@ public class Goods {
 	@Column(length=50)
 	private String goodsname;
 	
-	@OneToMany(mappedBy="goods")
-	private Set<GoodsImage> goodsimages = new HashSet<>(); //这里要实例化，不然会报空指针
+	@OneToMany(mappedBy="goods",targetEntity=GoodsImage.class) //去掉这个mappedBy后不能取到关联的表的内容mappedBy相当于inverse=true
+	@Cascade(value= {org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+	private Set<GoodsImage> goodsImages = new HashSet<>();
 	
 	@Min(value=1,message="必须大于或等于1")
-	
 	@Column
 	private Double price;
 	
@@ -50,10 +54,10 @@ public class Goods {
 	private Order order;
 	
 	
-	public Integer getGoodsid() {
+	public int getGoodsid() {
 		return goodsid;
 	}
-	public void setGoodsid(Integer goodsid) {
+	public void setGoodsid(int goodsid) {
 		this.goodsid = goodsid;
 	}
 	public String getGoodsname() {
@@ -80,12 +84,17 @@ public class Goods {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Set<GoodsImage> getGoodsimages() {
-		return goodsimages;
+	
+	public Set<GoodsImage> getGoodsImages() {
+		return goodsImages;
 	}
-	public void setGoodsimages(Set<GoodsImage> goodsimages) {
-		this.goodsimages = goodsimages;
-	}
+
+
+	public void addGoodsGoodsImage(GoodsImage goodsImage) {  
+        goodsImage.setGoods(this);  //关键
+        this.goodsImages.add(goodsImage);  
+    } 
+	
 	public Order getOrder() {
 		return order;
 	}

@@ -6,25 +6,25 @@ import com.junhao.domain.Goods;
 
 public interface GoodsDao {
 	
-	public List<Goods> findGoods();
+	List<Goods> listGoodses();
 	
-	public List<Goods> findGoodsByPageNum(int index,int row);
+	List<Goods> listGoodses(int index, int row);
 	
-	public int findGoodsCount();
+	int countGoods();
 	
-	public boolean delete(int id);
+	boolean deleteGoods(int id);
 	
 	//添加商品
-	public int insertGoods(Goods entity);
+	int insertGoods(Goods entity);
 	
-	public Goods findGoodsById(int goodsid);
+	Goods getGoods(int goodsid);
 	
-	public boolean updateImgpath(Integer imgid,String imgpath);
+	boolean updateImagePath(Integer imgid, String imgpath);
 	
 	//搜索商品
-	public List<Goods> findGoodsBySearchKey(String searchkey);
+	List<Goods> listGoodses(String searchkey);
 	
 	//更新商品信息
-	public boolean updateGoodsWithpriceAndgoodsname(Goods goods);
+	boolean updateGoods(Goods goods);
 	
 }

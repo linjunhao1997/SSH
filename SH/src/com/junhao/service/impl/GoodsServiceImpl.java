@@ -28,23 +28,23 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsDao goodsDao;
 
 	@Override
-	public List<Goods> showGoods() {
-		return goodsDao.findGoods();
+	public List<Goods> listGoodses() {
+		return goodsDao.listGoodses();
 	}
 
 	@Override
-	public List<Goods> showGoodsByPage(int index, int row) {
-		return this.goodsDao.findGoodsByPageNum(index, row);
+	public List<Goods> listGoodses(int index, int row) {
+		return this.goodsDao.listGoodses(index, row);
 	}
 
 	@Override
-	public int getGoodsCount() {
-		return this.goodsDao.findGoodsCount();
+	public int countGoods() {
+		return this.goodsDao.countGoods();
 	}
 
 	@Override
 	public boolean  deleteGoods(int goodsid) {
-		return this.goodsDao.delete(goodsid);
+		return this.goodsDao.deleteGoods(goodsid);
 	}
 
 
@@ -55,24 +55,24 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Goods getGoodsById(int goodsid) {
-		return this.goodsDao.findGoodsById(goodsid);
+	public Goods getGoods(int goodsid) {
+		return this.goodsDao.getGoods(goodsid);
 	}
 
 	@Override
-	public boolean uploadGoodsImage(Integer imgid,String imgpath) {
-		return this.goodsDao.updateImgpath(imgid,imgpath);
+	public boolean updateGoodsImage(Integer imgid,String imgpath) {
+		return this.goodsDao.updateImagePath(imgid,imgpath);
 	}
 
 	@Override
-	public List<Goods> searchGoods(String searchkey) {
+	public List<Goods> listGoodses(String searchkey) {
 		
-		return this.goodsDao.findGoodsBySearchKey(searchkey);
+		return this.goodsDao.listGoodses(searchkey);
 	}
 
 	@Override
 	public boolean updateGoods(Goods entity) {
-		return this.goodsDao.updateGoodsWithpriceAndgoodsname(entity);
+		return this.goodsDao.updateGoods(entity);
 	}	
 
 }

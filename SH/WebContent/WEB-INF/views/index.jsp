@@ -12,6 +12,7 @@
 	<h1>请在后面输入loginForm登录</h1>
 	<div>
 		${sbHtml}
+		${user}
 	</div>
 
 	<script>

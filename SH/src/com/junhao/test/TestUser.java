@@ -22,7 +22,7 @@ public class TestUser {
 	@Test
 	public void demoTest() {
 	
-		System.out.print(userService.findUserById(4));
+		System.out.print(userService.getUsername(4));
 		
 	}
 	
@@ -38,7 +38,7 @@ public class TestUser {
 	
 	@Test 
 	public void demoTest3() {
-		User user=userService.login("林俊浩","1234567");
+		User user=userService.getUser("林俊浩","1234567");
 		System.out.println(user.getPassword());
 	}
 	

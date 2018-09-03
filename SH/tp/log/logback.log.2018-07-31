@@ -1,0 +1,3 @@
+2018-07-31 15:38:04.694 [main] INFO  com.junhao.test.LogBackTest:  logback的--info日志--输出了
+2018-07-31 15:38:04.699 [main] WARN  com.junhao.test.LogBackTest:  logback的--warn日志--输出了
+2018-07-31 15:38:04.699 [main] ERROR com.junhao.test.LogBackTest:  logback的--error日志--输出了

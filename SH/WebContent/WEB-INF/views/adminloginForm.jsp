@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
-				<form action="admin/login" class="form-horizontal" enctype="mutipart/form-data" method="post">
+				<form action="adminlogin" class="form-horizontal" enctype="mutipart/form-data" method="post">
 					<span class="heading">管理员登录</span>
 					<div class="form-group">
 						<input type="text" class="form-control" id="adminname"

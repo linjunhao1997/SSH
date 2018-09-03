@@ -26,48 +26,31 @@ public class OrderDaoImpl implements OrderDao {
 	private SessionFactory sessionFactory;
 	
 	private Session getSession() {
-		return sessionFactory.openSession();
-		
+		return sessionFactory.openSession();	
 	}
 	
 	private Session getCurrentSession() {
-		return sessionFactory.getCurrentSession();
-		
+		return sessionFactory.getCurrentSession();	
 	}
 
 	@Override
-	public void saveOrderByUseridAndGoodsid(User user, Integer goodsid) {
-		/*Session session = getSession();
-		Criteria criteria  = session.createCriteria(Goods.class);
-		criteria.add(Restrictions.eq("goodsid",uid));
-		Goods goods = (Goods)criteria.uniqueResult();
-		Order order = new Order();
-		order.setUserid(userid);
-		order.setAddress("暂无");
-		order.setQuantity(1);
-		order.setPrice(goods.getPrice());
-		order.setState(0);
-		session.save(order);*/
-		Session session =getCurrentSession();
-		Goods goods=(Goods)session.get(Goods.class,goodsid);
-		//goods.setGoodsid(goodsid);
-		
-		
+	public void saveOrders(User user, Integer goodsid) {
+		Session session = getCurrentSession();
+		Goods goods = (Goods)session.get(Goods.class, goodsid);
 		Order order = new Order();
 		order.setGoods(goods);
 		order.setQuantity(1);
-		order.setPrice(goods.getPrice()*order.getQuantity());
+		order.setPrice(goods.getPrice() * order.getQuantity());
 		order.setUser(user);
-		session.save(order);
-		
+		session.save(order);	
 	}
 
 	@Override
-	public List<Order> findOrder(Integer id) {
+	public List<Order> listOrders(Integer id) {
 		
-		//String hql = "select o.id, o.price, o.quantity from Order o,Goods g where o.userid=:userid";
-		//List<Order> orders =getSession().createQuery(hql).setParameter("userid",id).list();
-		//return orders;
+		// String hql = "select o.id, o.price, o.quantity from Order o,Goods g where o.userid=:userid";
+		// List<Order> orders =getSession().createQuery(hql).setParameter("userid",id).list();
+		// return orders;
 		User user = (User)getCurrentSession().get(User.class, id);
 		return user.getOrders();
 		
@@ -75,7 +58,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public boolean deleteOrder(Order order) {
-		Session session=getCurrentSession();
+		Session session = getCurrentSession();
 		
 		try {
 			session.delete(order);
@@ -83,9 +66,5 @@ public class OrderDaoImpl implements OrderDao {
 		}catch(HibernateException e) {
 			return false;
 		}
-	}
-
-
-
-	
+	}	
 }

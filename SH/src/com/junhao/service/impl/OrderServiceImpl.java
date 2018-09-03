@@ -29,12 +29,12 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao orderDao;
 	@Override
-	public void addOrder(User user, Integer goodsid) {
-		this.orderDao.saveOrderByUseridAndGoodsid(user, goodsid);
+	public void insertOrder(User user, Integer goodsid) {
+		this.orderDao.saveOrders(user, goodsid);
 	}
 	@Override
-	public List<Order> showOrder(Integer id) {
-		return this.orderDao.findOrder(id);
+	public List<Order> listOrders(Integer id) {
+		return this.orderDao.listOrders(id);
 	}
 	@Override
 	public boolean deleteOrder(Order order) {

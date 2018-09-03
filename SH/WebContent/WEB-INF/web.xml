@@ -7,12 +7,12 @@
 	<welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- 指定Spring Ioc容器读取Bean定义的XML文件路径-->
+  	<!-- 这个文件定义了根上下文 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
-  	<!-- 这个文件定义了根上下文 -->
   	<param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+  
   <!-- 此监听器实现了ServletContextListener接口，负责IOC容器在Web环境的启动
   	交由ContextLoader创建根应用上下文WebApplicationContext-->
   <listener>
@@ -30,17 +30,16 @@
   	</init-param>
   	<load-on-startup>1</load-on-startup>
   	<multipart-config>
-	     	<location>E:\eclipse-workspace\SH\WebContent\WEB-INF\temp</location>
-			<!--上传文件的最大限制5MB -->
-			<max-file-size>5242880</max-file-size>
-			<!--请求的最大限制20MB -->
-			<max-request-size>20971520</max-request-size>
-			<!--当文件的大小超过临界值时将写入磁盘 -->
-			<file-size-threshold>0</file-size-threshold>
-		</multipart-config>
+     	<location>E:\eclipse-workspace\SH\WebContent\WEB-INF\temp</location>
+		<!--上传文件的最大限制5MB -->
+		<max-file-size>5242880</max-file-size>
+		<!--请求的最大限制20MB -->
+		<max-request-size>20971520</max-request-size>
+		<!--当文件的大小超过临界值时将写入磁盘 -->
+		<file-size-threshold>0</file-size-threshold>
+	</multipart-config>
   </servlet>
   
-  <!-- 将DispatcherServlet映射到/ -->
   <servlet-mapping>
   	<servlet-name>springmvc</servlet-name>
   	<url-pattern>/</url-pattern>
@@ -48,7 +47,7 @@
   
   
   <!-- 编码过滤器 -->
-    <filter>
+  <filter>
       <filter-name>encodingFilter</filter-name>
       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
       <init-param>
@@ -59,13 +58,14 @@
         <param-name>forceEncoding</param-name>
         <param-value>true</param-value>
       </init-param>
-    </filter>
-    <filter-mapping>
-      <filter-name>encodingFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-    </filter-mapping>
+   </filter>
+   <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+   </filter-mapping>
     
-    <!--hibernate Session管理 -->
+    <!--与上下文OpenSessionInViewInterceptor的配置功能相同 -->
+    
     <filter>
     	<filter-name>SpringOpenSessionInViewFilter</filter-name>
     	<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
@@ -74,4 +74,5 @@
     	<filter-name>SpringOpenSessionInViewFilter</filter-name>
     	<url-pattern>/*</url-pattern>
     </filter-mapping>
+    
 </web-app>

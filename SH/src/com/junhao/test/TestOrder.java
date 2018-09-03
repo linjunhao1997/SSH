@@ -31,14 +31,14 @@ public class TestOrder {
 	public void demoTest() {
 		User user = new User();
 		user.setId(9);
-		orderService.addOrder(user, 1);
+		orderService.insertOrder(user, 1);
 		
 	}
 	
 	@Test
 	public void demoTest2() {
 	
-		List<Order> orders=orderService.showOrder(8);
+		List<Order> orders=orderService.listOrders(8);
 		Iterator<Order> iterator = orders.iterator();
 		while(iterator.hasNext()) {
 			System.out.println(iterator.next().getGoods().getIntroduce());

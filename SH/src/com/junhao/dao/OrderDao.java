@@ -8,10 +8,10 @@ import com.junhao.domain.User;
 
 public interface OrderDao {
 	
-	public void saveOrderByUseridAndGoodsid(User user ,Integer goodsid);
+	void saveOrders(User user, Integer goodsid);
 	
-	public List<Order> findOrder(Integer id);
+	List<Order> listOrders(Integer id);
 	
-	public boolean deleteOrder(Order order);
+	boolean deleteOrder(Order order);
 	
 }

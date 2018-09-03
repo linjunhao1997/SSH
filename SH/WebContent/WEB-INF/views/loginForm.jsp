@@ -32,8 +32,8 @@
 					</div>
 					<div class="form-group">
 						<div class="main-checkbox">
-							<input type="checkbox" value="None" id="checkbox1" name="check" />
-							<label for="checkbox1"></label>
+							<input type="checkbox" value="autoLogin" id="checkbox" name="autoLogin" />
+							<label for="checkbox"></label>
 						</div>
 						<span class="text">Remember me</span>
 					</div>

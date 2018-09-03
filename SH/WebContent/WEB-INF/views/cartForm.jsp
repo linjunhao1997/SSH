@@ -28,7 +28,7 @@
 				<tr id="${orders.id}">
 					<td>${orders.goods.goodsname}</td>
 					<td>
-					<img  src="<c:url value='/resource/images/'/><c:forEach items="${orders.goods.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgpath}</c:forEach>"
+					<img  src="<c:url value='/resource/images/'/><c:forEach items="${orders.goods.goodsImages}" begin="0" end="0" var="goodsImage">${goodsImage.imgpath}</c:forEach>"
 							alt="${orders.goods.introduce}"  style="width=50px;height=50px;">
 					</td>
 					<td class="price">${orders.price}</td>

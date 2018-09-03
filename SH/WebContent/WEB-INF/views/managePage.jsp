@@ -27,7 +27,7 @@
 					<td>${entity.goodsid}</td>
 					<td>${entity.goodsname}</td>
 					<td>${entity.price}</td>
-					<td><img src="<c:url value='/resource/images/'/><c:forEach items="${entity.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgpath}</c:forEach>" height="40"/></td>
+					<td><img src="<c:url value='/resource/images/'/><c:forEach items="${entity.goodsImages}" begin="0" end="0" var="goodsimage">${goodsimage.imgpath}</c:forEach>" height="40"/></td>
 					
 					<td>
 					<a href="delete/${entity.goodsid}?pageNO=${pageNO}" class="abtn">删除</a>

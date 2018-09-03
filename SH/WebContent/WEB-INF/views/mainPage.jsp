@@ -69,7 +69,7 @@
 				<div class="col-md-offset-2 col-md-8">
 					<div id="${goods.goodsid}"class="thumbnail">
 						<a href="#"> 
-						<img src="<c:url value='/resource/images/'/><c:forEach items="${goods.goodsimages}" begin="0" end="0" var="goodsimage">${goodsimage.imgpath}</c:forEach>"
+						<img src="<c:url value='/resource/images/'/><c:forEach items="${goods.goodsImages}" begin="0" end="0" var="goodsImage">${goodsImage.imgpath}</c:forEach>"
 							alt="${goods.introduce}">
 						</a>
 					
